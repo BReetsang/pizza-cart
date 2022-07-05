@@ -66,6 +66,7 @@
         },
         totalPizzaQty(){
             return this.smaPizzaQty + this.medPizzaQty + this.lrgPizzaQty
+                        
         },
         makePayment() {
             if( !this.paymentAmount) {
@@ -76,7 +77,7 @@
                 this.paymentMessage = 'Payment Successful! Enjoy your pizza and please do order again!'
                 setTimeout(() => {
                     this.payNow=false;
-                    this.clearCart()
+                    this.clearCart();
                     this.open=false;
 
                 }, 3000);
@@ -91,7 +92,14 @@
             this.medPizzaTotal = 0.00;
             this.medPizzaQty = 0; 
             this.lrgPizzaTotal = 0.00; 
-            this.lrgPizzaQty = 0;
+            this.lrgPizzaQty = 0;           
+        },
+        hideCart() {
+            if(this.cartTotal() > 0) {
+                return true                
+            }else {
+                return false
+            }
         }
     }">
 
@@ -105,7 +113,7 @@
             </div>
 
             <div class="f1">
-                <button x-on:click="open = true" x-show="showCart"><img src="cart_pic.png" width="30" alt="">Show
+                <button x-on:click="open = true" x-show="hideCart()"><img src="cart_pic.png" width="30" alt="">Show
                     cart</button>
                 <strong x-show="totalPizzaQty()>0"><span x-text="totalPizzaQty()"></span> Pizzas in the cart</strong>
             </div>
